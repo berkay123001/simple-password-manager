@@ -8,5 +8,5 @@
   - User passwords are stored as **hashed values** (using SHA-256)
 
 ---
-
+- This project is a beginner-level Python project designed to establish a solid understanding of Python fundamentals. It is built with simple logic and is not intended to be a professional project.
 
