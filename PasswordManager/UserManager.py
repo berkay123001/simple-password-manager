@@ -1,4 +1,6 @@
 import json
+import os
+
 
 class UserManager:
     def __init__(self, user_file="users.json"):
@@ -31,3 +33,19 @@ class UserManager:
         if username not in self.users or self.users[username] != password:
             return False, "Kullanıcı adı veya şifre hatalı."
         return True, f"Hoş geldiniz, {username}!"
+
+#---------------------------------------------------------------------------
+    def delete_user(self, username):
+        """Kullanıcıyı siler."""
+        if username in self.users:
+            del self.users[username]  # Kullanıcıyı kullanıcı listesinden kaldır
+            self.save_users()  # Güncel listeyi kaydet
+            user_file = f"{username}_passwords.json"
+            try:
+                os.remove(user_file)  # Kullanıcının şifre dosyasını sil
+                return True, f"{username} başarıyla silindi."
+            except FileNotFoundError:
+                return True, f"{username} silindi ancak şifre dosyası bulunamadı."
+        else:
+            return False, "Kullanıcı bulunamadı!"
+

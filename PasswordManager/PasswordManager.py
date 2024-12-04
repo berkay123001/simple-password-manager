@@ -34,3 +34,21 @@ class PasswordManager:
         for index, record in enumerate(self.passwords, start=1):
             result += f"{index:<4}{record['site']:<20}{record['username']:<20}{record['password']:<20}\n"
         return result
+
+    def delete_password(self, index):
+        """Belirli bir şifreyi siler."""
+        if 0 <= index < len(self.passwords):  # indeks kontrolü
+            removed = self.passwords.pop(index)  # Şifreyi listeden kaldır
+            self.save_passwords()  # Güncel listeyi kaydet
+            return True, f"{removed['site']} için şifre başarıyla silindi."
+        else:
+            return False, "Geçersiz şifre numarası!"
+
+    def update_password(self, index, new_password):
+        """Belirli bir şifreyi günceller."""
+        if 0 <= index < len(self.passwords):  # Geçerli bir indeks kontrolü
+            self.passwords[index]['password'] = new_password  # Şifreyi güncelle
+            self.save_passwords()  # Güncel listeyi kaydet
+            return True, f"{self.passwords[index]['site']} için şifre başarıyla güncellendi."
+        else:
+            return False, "Geçersiz şifre numarası!"
