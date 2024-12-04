@@ -1,10 +1,8 @@
-# Simple Password Manager
+Simple Password Manager
+A simple and secure password manager built with Python. Key features include:
 
-A simple password manager built with Python. Features include:
-- User registration and login
-- Password management per user
-- Secure storage using JSON
-
-## Getting Started
-
-Clone this repository:
+-User registration and login with hashed passwords for enhanced security.
+-Password management per user: Add, list, update, delete, and search passwords.
+-Secure storage using JSON:
+-User passwords are stored as hashed values (using SHA-256).
+-Managed passwords are stored securely for retrieval.
