@@ -1,4 +1,5 @@
 import json
+import hashlib
 
 class PasswordManager:
     def __init__(self, username):
@@ -52,3 +53,26 @@ class PasswordManager:
             return True, f"{self.passwords[index]['site']} için şifre başarıyla güncellendi."
         else:
             return False, "Geçersiz şifre numarası!"
+
+
+
+    def search_passwords(self, search_term):
+        """Belirli bir terime göre şifreleri arar."""
+        results = [
+            record for record in self.passwords
+            if search_term.lower() in record['site'].lower() or search_term.lower() in record['username'].lower()
+        ]
+        if results:
+            result_str = "\nArama Sonuçları:\n"
+            result_str += f"{'No':<4}{'Site':<20}{'Kullanıcı Adı':<20}{'Şifre':<20}\n"
+            result_str += "-" * 60 + "\n"
+            for index, record in enumerate(results, start=1):
+                result_str += f"{index:<4}{record['site']:<20}{record['username']:<20}{record['password']:<20}\n"
+            return result_str
+        else:
+            return "Hiçbir sonuç bulunamadı."
+
+
+
+
+

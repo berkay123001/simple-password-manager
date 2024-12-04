@@ -4,7 +4,7 @@ def main():
     user_manager = UserManager()
 
     while True:
-        print("\n1. Hesap Oluştur")
+        print("\n1. Hesap Oluştur");
         print("2. Giriş Yap")
         print("3. Çıkış Yap ")
         choice = input("Bir seçenek girin (1-2): ")
@@ -27,7 +27,8 @@ def main():
                     print("2. Şifreleri Listele")
                     print("3. Şifre Sil")
                     print("4. Şifre Güncelle")
-                    print("5. Çıkış")
+                    print("5. Şifre Ara")
+                    print("6. Çıkış")
 
                     sub_choice = input("Bir seçenek girin (1-5): ")
 
@@ -49,6 +50,10 @@ def main():
                         password_manager.update_password(password_index, new_password)
 
                     elif sub_choice == "5":
+                        search_term = input("Aramak istediğiniz site veya kullanıcı adı: ").strip()
+                        print(password_manager.search_passwords(search_term))
+
+                    elif sub_choice == "6":
                         print("Çıkış yapılıyor...")
                         break
                     else:
