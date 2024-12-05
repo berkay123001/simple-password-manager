@@ -34,7 +34,26 @@ class UserManager:
 
     def login_user(self, username, password):
         """Kullanıcıyı giriş yaparken doğrular."""
-        hashed_password = self.hash_password(password)  # Girilen şifreyi hash'le
-        if username not in self.users or self.users[username]["password"] != hashed_password:
-            return False, "Kullanıcı adı veya şifre hatalı."
-        return True, f"Hoş geldiniz, {username}!"
+        if username not in self.users:
+            return False, "Kullanıcı adı bulunamadı."
+
+        if "attempts" not in self.users[username]:
+            self.users[username]["attempts"] = 0
+
+        if self.users[username]["attempts"] >= 5:
+            return False, "Hesabınız geçici olarak kilitlendi. Daha sonra tekrar deneyin."
+
+        hashed_password = self.hash_password(password)
+
+        if self.users[username]["password"] == hashed_password:
+            self.users[username]["attempts"] = 0
+            self.save_users()
+            return True, f"Hoş geldiniz, {username}!"
+        else:
+            self.users[username]["attempts"] += 1
+            self.save_users()
+            remaining_attempts = 5 - self.users[username]["attempts"]
+            if remaining_attempts > 0:
+                return False, f"Yanlış şifre! Kalan deneme hakkınız: {remaining_attempts}"
+            else:
+                return False, "Hesabınız geçici olarak kilitlendi. Daha sonra tekrar deneyin."

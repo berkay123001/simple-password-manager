@@ -1,10 +1,10 @@
 {
     "Berkay": {
         "password": "c7eee323421d91ad06f707f26ebe28a4bf7720a0b1fe148f3edee434138801d4",
-        "email": "berkay@example.com"
+        "email": "berkay@example.com",
+        "attempts": 1
     },
     "Mustafa": {
         "password": "bc6a89a6a37e3974b458d86ab59cec8d6f9b3bae61f92a186fef30c4c7309231"
     }
 }
-
